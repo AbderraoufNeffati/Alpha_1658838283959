@@ -1,0 +1,1114 @@
+openapi: 3.0.0
+info:
+  title: Alpha
+  description: You can obtain JWT token from login API
+  version: 0.1
+servers:
+  - url: http://localhost:3000/api
+    description: Local server for testing
+paths:
+  /login:
+    post:
+      summary: Login API
+      security: []   # No security
+      tags:
+        - Security
+      requestBody:
+        content:
+          application/json:
+            schema:      # Request body contents
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              example:   # Sample object
+                username: admin
+                password: 62f264d7ad826f02a8af714c0a54b197935b717656b80461686d450f7b3abde4c553541515de2052b9af70f710f0cd8a1a2d3f4d60aa72608d71a63a9a93c0f5
+      responses:
+        '200':
+          description: OK
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /verifyToken:
+    post:
+      summary: Verify token API
+      security: [] #No security
+      tags:
+        - Security
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /changePassword:
+    post:
+      summary: Change password API
+      tags:
+        - Security
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                passwordNew:
+                  type: string
+                passwordOld:
+                  type: string
+      responses:
+        '200':
+          description: OK
+                
+
+  #-----  Classe  -----
+  /classe/:
+    post:
+      summary: CRUD ACTION create
+      tags:
+        - Classe
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classe"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nom:
+                  type: string
+    get:
+      summary: CRUD ACTION list
+      tags:
+        - Classe
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Classe"
+    
+  /classe/{id}:
+    delete:
+      summary: CRUD ACTION delete
+      tags:
+        - Classe
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    get:
+      summary: CRUD ACTION get
+      tags:
+        - Classe
+      parameters:
+        - name: id
+          in: path
+          description: Id resource
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classe"
+    post:
+      summary: CRUD ACTION update
+      tags:
+        - Classe
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classe"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Classe"
+    
+  /classe/findBy_matiere/{key}:
+    get:
+      summary: CRUD ACTION findBy_matiere
+      tags:
+        - Classe
+      parameters:
+        - name: key
+          in: path
+          description: Id of model to search for
+          required: true
+          schema:
+            type: Objectid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Classe"
+    
+  #-----  Enseignant  -----
+  /enseignant/:
+    post:
+      summary: CRUD ACTION create
+      tags:
+        - Enseignant
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Enseignant"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nom:
+                  type: string
+                prenom:
+                  type: string
+    get:
+      summary: CRUD ACTION list
+      tags:
+        - Enseignant
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Enseignant"
+    
+  /enseignant/{id}:
+    delete:
+      summary: CRUD ACTION delete
+      tags:
+        - Enseignant
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    get:
+      summary: CRUD ACTION get
+      tags:
+        - Enseignant
+      parameters:
+        - name: id
+          in: path
+          description: Id resource
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Enseignant"
+    post:
+      summary: CRUD ACTION update
+      tags:
+        - Enseignant
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Enseignant"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Enseignant"
+    
+  /enseignant/findBy_classe/{key}:
+    get:
+      summary: CRUD ACTION findBy_classe
+      tags:
+        - Enseignant
+      parameters:
+        - name: key
+          in: path
+          description: Id of model to search for
+          required: true
+          schema:
+            type: Objectid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Enseignant"
+    
+  /enseignant/findBy_matiere/{key}:
+    get:
+      summary: CRUD ACTION findBy_matiere
+      tags:
+        - Enseignant
+      parameters:
+        - name: key
+          in: path
+          description: Id of model to search for
+          required: true
+          schema:
+            type: Objectid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Enseignant"
+    
+  #-----  Etudiant  -----
+  /etudiant/:
+    post:
+      summary: CRUD ACTION create
+      tags:
+        - Etudiant
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Etudiant"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date_de_naissance:
+                  type: integer
+                nom:
+                  type: string
+                prenom:
+                  type: string
+    get:
+      summary: CRUD ACTION list
+      tags:
+        - Etudiant
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Etudiant"
+    
+  /etudiant/{id}:
+    delete:
+      summary: CRUD ACTION delete
+      tags:
+        - Etudiant
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    get:
+      summary: CRUD ACTION get
+      tags:
+        - Etudiant
+      parameters:
+        - name: id
+          in: path
+          description: Id resource
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Etudiant"
+    post:
+      summary: CRUD ACTION update
+      tags:
+        - Etudiant
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Etudiant"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Etudiant"
+    
+  /etudiant/findBy_classe/{key}:
+    get:
+      summary: CRUD ACTION findBy_classe
+      tags:
+        - Etudiant
+      parameters:
+        - name: key
+          in: path
+          description: Id of model to search for
+          required: true
+          schema:
+            type: Objectid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Etudiant"
+    
+  /etudiant/findBy_matiere/{key}:
+    get:
+      summary: CRUD ACTION findBy_matiere
+      tags:
+        - Etudiant
+      parameters:
+        - name: key
+          in: path
+          description: Id of model to search for
+          required: true
+          schema:
+            type: Objectid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Etudiant"
+    
+  #-----  Examen  -----
+  /examen/:
+    post:
+      summary: CRUD ACTION create
+      tags:
+        - Examen
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Examen"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                note:
+                  type: number
+                place:
+                  type: string
+                valid:
+                  type: boolean
+    get:
+      summary: CRUD ACTION list
+      tags:
+        - Examen
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Examen"
+    
+  /examen/{id}:
+    delete:
+      summary: CRUD ACTION delete
+      tags:
+        - Examen
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    get:
+      summary: CRUD ACTION get
+      tags:
+        - Examen
+      parameters:
+        - name: id
+          in: path
+          description: Id resource
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Examen"
+    post:
+      summary: CRUD ACTION update
+      tags:
+        - Examen
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Examen"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Examen"
+    
+  /examen/findBy_classe/{key}:
+    get:
+      summary: CRUD ACTION findBy_classe
+      tags:
+        - Examen
+      parameters:
+        - name: key
+          in: path
+          description: Id of model to search for
+          required: true
+          schema:
+            type: Objectid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Examen"
+    
+  /examen/findBy_enseignant/{key}:
+    get:
+      summary: CRUD ACTION findBy_enseignant
+      tags:
+        - Examen
+      parameters:
+        - name: key
+          in: path
+          description: Id of model to search for
+          required: true
+          schema:
+            type: Objectid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Examen"
+    
+  /examen/findBy_etudiant/{key}:
+    get:
+      summary: CRUD ACTION findBy_etudiant
+      tags:
+        - Examen
+      parameters:
+        - name: key
+          in: path
+          description: Id of model to search for
+          required: true
+          schema:
+            type: Objectid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Examen"
+    
+  /examen/findBy_matiere/{key}:
+    get:
+      summary: CRUD ACTION findBy_matiere
+      tags:
+        - Examen
+      parameters:
+        - name: key
+          in: path
+          description: Id of model to search for
+          required: true
+          schema:
+            type: Objectid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Examen"
+    
+  /examen/{id}/valide:
+    post:
+      summary: l&#x27;api est valide l&#x27;examen
+      security: []   # No security
+      tags:
+        - Examen
+      parameters:
+        - name: id
+          in: path
+          description: id de l&#x27;examen
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    
+  #-----  Matiere  -----
+  /matiere/:
+    post:
+      summary: CRUD ACTION create
+      tags:
+        - Matiere
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Matiere"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nom:
+                  type: string
+    get:
+      summary: CRUD ACTION list
+      tags:
+        - Matiere
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Matiere"
+    
+  /matiere/{id}:
+    delete:
+      summary: CRUD ACTION delete
+      tags:
+        - Matiere
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    get:
+      summary: CRUD ACTION get
+      tags:
+        - Matiere
+      parameters:
+        - name: id
+          in: path
+          description: Id resource
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Matiere"
+    post:
+      summary: CRUD ACTION update
+      tags:
+        - Matiere
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Matiere"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Matiere"
+    
+  #-----  User  -----
+  /user/{id}/changePassword:
+    post:
+      summary: Change password of user from admin
+      tags:
+        - User
+      responses:
+        "200":
+          description: OK
+    
+  /user/:
+    post:
+      summary: CRUD ACTION create
+      tags:
+        - User
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mail:
+                  type: string
+                name:
+                  type: string
+                password:
+                  type: string
+                roles:
+                  type: string
+                surname:
+                  type: string
+                username:
+                  type: string
+    get:
+      summary: CRUD ACTION list
+      tags:
+        - User
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+    
+  /user/{id}:
+    delete:
+      summary: CRUD ACTION delete
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+    get:
+      summary: CRUD ACTION get
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: Id resource
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    post:
+      summary: CRUD ACTION update
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+    
+    
+  #-----  User  -----
+  /Users/{id}/changePassword:
+    post:
+      summary: Change password by admin API
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                passwordNew:
+                  type: string
+                passwordAdmin:
+                  type: string
+      responses:
+        '200':
+          description: OK
+  /Users/{id}:
+    post:
+      summary: Update User API
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+    delete:
+      summary: Delete User API
+      tags:
+        - User
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /Users:
+    post:
+      summary: Create User API
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: 'string'
+                password: 
+                  type: 'string'
+                mail: 
+                  type: 'string'
+                name: 
+                  type: 'string'
+                surname: 
+                  type: 'string'
+                roles: 
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    
+# JWT security
+security:
+  - bearerAuth: [] 
+  
+  
+# Components
+components:
+
+  # Security
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+
+  # Data Model
+  schemas:
+    User:
+      properties:
+        username:
+          type: 'string'
+        password: 
+          type: 'string'
+        mail: 
+          type: 'string'
+        name: 
+          type: 'string'
+        surname: 
+          type: 'string'
+        roles: 
+          type: array
+          items:
+            type: string
+      required:
+        - username
+        - password
+        
+
+    Classe:
+      properties:
+        _id:
+          type: string
+        nom:
+          type: string
+      required:
+        -  _id
+        - nom
+      
+    
+    Enseignant:
+      properties:
+        _id:
+          type: string
+        nom:
+          type: string
+        prenom:
+          type: string
+      required:
+        -  _id
+        - nom
+      
+    
+    Etudiant:
+      properties:
+        _id:
+          type: string
+        date_de_naissance:
+          type: integer
+        nom:
+          type: string
+        prenom:
+          type: string
+      required:
+        -  _id
+        - prenom
+      
+    
+    Examen:
+      properties:
+        _id:
+          type: string
+        note:
+          type: number
+        place:
+          type: string
+        valid:
+          type: boolean
+      required:
+        -  _id
+      
+    
+    Matiere:
+      properties:
+        _id:
+          type: string
+        nom:
+          type: string
+      required:
+        -  _id
+        - nom
+      
+    
+    User:
+      properties:
+        _id:
+          type: string
+        mail:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+        roles:
+          type: string
+        surname:
+          type: string
+        username:
+          type: string
+      required:
+        -  _id
+        - password
+        - username
+      
+    

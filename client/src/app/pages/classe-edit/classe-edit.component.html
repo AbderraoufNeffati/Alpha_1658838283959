@@ -1,0 +1,88 @@
+<!-- TITLE -->
+<div class="mb-40 mt-40">
+    <h1>Classe</h1>
+</div>
+<div class="card mb-40">
+    <div class="card-body">
+        <h5 class="card-title border-bottom border-italia">
+            <i class="fa fa-search"></i> Dettaglio
+        </h5>
+        <form #editForm="ngForm" [ngClass]="{'was-validated': formValid!=null}">
+            <div class="row mt-40 justify-content-md-center">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nom" [(ngModel)]="item.nom" name="nom" #nom="ngModel" required>
+                        <label [className]="item.nom && item.nom.length > 0 ? 'active' : ''" for="nom">Nom *</label>
+                        <div class="invalid-feedback">Valore obbligatorio</div>
+                    </div>
+                    <!-- RELATIONS -->
+                    <h2 class="mb-20 mt-40">Relazioni</h2>
+
+                    <div class="pb-30">
+                        <div class="mb-20">
+                            <label>_matiere</label>
+
+                            <span class="dropdown ml-20">
+                                <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdownMenuButton_matiere" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Add
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_matiere">
+                                    <button class="dropdown-item" *ngFor="let item of list_matiere" [class.disabled]="containMatiere(item._id)" (click)="$event.preventDefault(); containMatiere(item._id) || addMatiere(item._id)">{{item._id}}
+                                    </button>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="mb-40">
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngIf="!item._matiere || item._matiere.length == 0">No item found</li>
+                                <li class="list-group-item" *ngFor="let obj of item._matiere; let i = index">
+                                    <a [routerLink]="['/matieres', obj]">
+                                        {{obj}}
+                                    </a>
+
+                                    <button class="btn btn-outline-primary btn-xs pull-right" type="button" (click)="removeMatiere(i)">
+                                        Rimuovi
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2 class="mb-20 mt-40" *ngIf="externalEtudiant__classe[0] || externalEnseignant__classe[0] || externalExamen__classe[0]">Relazioni esterne</h2>
+        
+                        <h3 *ngIf="externalEtudiant__classe[0]">Etudiant</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of externalEtudiant__classe">
+                                <a [routerLink]="['/etudiants', item._id]">
+                                    {{item._id}}
+                                </a>
+                            </li>
+                        </ul>
+                        <h3 *ngIf="externalEnseignant__classe[0]">Enseignant</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of externalEnseignant__classe">
+                                <a [routerLink]="['/enseignants', item._id]">
+                                    {{item._id}}
+                                </a>
+                            </li>
+                        </ul>
+                        <h3 *ngIf="externalExamen__classe[0]">Examen</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let item of externalExamen__classe">
+                                <a [routerLink]="['/examens', item._id]">
+                                    {{item._id}}
+                                </a>
+                            </li>
+                        </ul>
+
+                    <!-- BUTTON BAR -->
+                    <div class="mt-40">
+                        <button class="btn btn-primary pull-right" (click)="save(editForm.valid, item)">Salva</button>
+                        <button class="btn btn-secondary pull-right mr-2" (click)="goBack()">Torna alla lista</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
